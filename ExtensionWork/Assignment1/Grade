@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ -f result ];
+  then
+  rm result
+fi
+
+
+for i in `seq 1 3`; do
+    
+    if [ -f tempresult1 ];
+    then
+      rm tempresult1
+    fi
+    ./a.exe < ./testfiles/t$i > tempresult1
+    diff tempresult1 ./testfiles/o$i > tempcnt
+    if [ -s tempcnt ] ; then
+      echo "Incorrect for example $i."
+    else
+      echo "Correct for example $i.";
+    fi;
+
+    echo "==================" >> result
+    echo "test" $i:  >> result
+    echo "student:" >> result
+     ./a.exe < ./testfiles/t$i >> result
+    echo "" >>result
+    echo "grader:" >> result
+     cat ./testfiles/o$i >> result
+    echo "" >> result
+done
+
+rm tempresult1
+rm tempcnt
