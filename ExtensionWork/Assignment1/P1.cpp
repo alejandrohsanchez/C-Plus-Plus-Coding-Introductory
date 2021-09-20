@@ -14,6 +14,6 @@ int main() {
         cin >> y;
     }
     
-    cout << "The final sum is " << sum << endl;
+    cout << "The final sum is " << sum;
     return 0;
 }
